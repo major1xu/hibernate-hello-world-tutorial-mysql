@@ -31,9 +31,14 @@ public class BookManager {
     protected void create() {
         // code to save a book
     	Book book = new Book();
+    	/*
         book.setTitle("Effective Java");
         book.setAuthor("Joshua Bloch");
         book.setPrice(32.59f);
+        */
+    	book.setTitle("Ultimate Java Programming");
+        book.setAuthor("Nam Ha Minh");
+        book.setPrice(19.99f);
      
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -58,8 +63,21 @@ public class BookManager {
         session.close();
     }
  
-    protected void update() {
+    protected void update(int bookid) {
         // code to modify a book
+    	Book book = new Book();
+        book.setId(bookid);
+        book.setTitle("Ultimate Java Programming");
+        book.setAuthor("Nam Ha Minh");
+        book.setPrice(19.99f);
+     
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+     
+        session.update(book);
+     
+        session.getTransaction().commit();
+        session.close();
     }
  
     protected void delete() {
@@ -71,9 +89,14 @@ public class BookManager {
     	BookManager manager = new BookManager();
         manager.setup();
         
+        // It appears created worked once, while update never worked...
         //manager.create();
         
         manager.read(1);
+        //manager.read(2);
+
+        
+        //manager.update(1);
      
         manager.exit();
     }
