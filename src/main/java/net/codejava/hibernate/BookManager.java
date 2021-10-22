@@ -90,12 +90,14 @@ public class BookManager {
         manager.setup();
         
         // It appears created worked once, while update never worked...
-        //manager.create();
+        // Caused by: com.mysql.cj.jdbc.exceptions.MySQLTransactionRollbackException: Lock wait timeout exceeded; try restarting transaction
+        // https://stackoverflow.com/questions/6000336/how-to-debug-lock-wait-timeout-exceeded-on-mysql/6005564#6005564
+        manager.create();
         
-        manager.read(1);
+        //manager.read(1);
         //manager.read(2);
 
-        
+        // 
         //manager.update(1);
      
         manager.exit();
