@@ -6,23 +6,27 @@ import java.util.List;
 import java.util.Date;
 import java.util.Iterator; 
  
+import org.hibernate.cfg.Configuration;
 import org.hibernate.HibernateException; 
 import org.hibernate.Session; 
-import org.hibernate.Transaction;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.Transaction;
 
 public class ManageEmployee {
    private static SessionFactory factory; 
    public static void main(String[] args) {
       
 	  // MXU: below methods worked better than the method setup() in BookManager class
-      try {
-         factory = new Configuration().configure().buildSessionFactory();
-      } catch (Throwable ex) { 
-         System.err.println("Failed to create sessionFactory object." + ex);
-         throw new ExceptionInInitializerError(ex); 
-      }
+	   try {
+	         factory = new Configuration().
+	                   configure().
+	                   //addPackage("com.xyz") //add package if used.
+	                   addAnnotatedClass(net.codejava.hibernate.Employee.class).
+	                   buildSessionFactory();
+	      } catch (Throwable ex) { 
+	         System.err.println("Failed to create sessionFactory object." + ex);
+	         throw new ExceptionInInitializerError(ex); 
+	      }
       
       ManageEmployee ME = new ManageEmployee();
 
@@ -52,7 +56,10 @@ public class ManageEmployee {
       
       try {
          tx = session.beginTransaction();
-         Employee employee = new Employee(fname, lname, salary);
+         Employee employee = new Employee();
+         employee.setFirstName(fname);
+         employee.setLastName(lname);
+         employee.setSalary(salary);
          employeeID = (Integer) session.save(employee); 
          tx.commit();
       } catch (HibernateException e) {
