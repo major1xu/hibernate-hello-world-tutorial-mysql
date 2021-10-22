@@ -16,6 +16,7 @@ public class ManageEmployee {
    private static SessionFactory factory; 
    public static void main(String[] args) {
       
+	  // MXU: below methods worked better than the method setup() in BookManager class
       try {
          factory = new Configuration().configure().buildSessionFactory();
       } catch (Throwable ex) { 
