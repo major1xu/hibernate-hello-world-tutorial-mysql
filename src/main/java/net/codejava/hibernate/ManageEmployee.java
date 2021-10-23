@@ -78,6 +78,9 @@ public class ManageEmployee {
       
       try {
          tx = session.beginTransaction();
+         
+         // https://www.tutorialspoint.com/hibernate/hibernate_query_language.htm
+         // query language: FROM Clause
          List employees = session.createQuery("FROM Employee").list(); 
          for (Iterator iterator = employees.iterator(); iterator.hasNext();){
             Employee employee = (Employee) iterator.next(); 
