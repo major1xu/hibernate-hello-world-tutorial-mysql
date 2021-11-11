@@ -8,6 +8,8 @@ import org.hibernate.EmptyInterceptor;
 import org.hibernate.Transaction;
 import org.hibernate.type.Type;
 
+// https://www.tutorialspoint.com/hibernate/hibernate_interceptors.htm
+
 public class MyInterceptor extends EmptyInterceptor {
    private int updates;
    private int creates;

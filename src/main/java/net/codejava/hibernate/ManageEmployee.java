@@ -45,6 +45,7 @@ public class ManageEmployee {
    
    /* Method to CREATE an employee in the database */
    public Integer addEmployee(String fname, String lname, int salary){
+	  // https://stackoverflow.com/questions/11428410/hibernate-4-0-0final-where-is-the-sessionfactory-opensessioninterceptor-interce 
       Session session = factory.withOptions()
               .interceptor(new MyInterceptor()).openSession();
       Transaction tx = null;
